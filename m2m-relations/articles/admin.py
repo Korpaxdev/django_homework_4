@@ -8,6 +8,8 @@ from .models import Article, Tag, Scope
 class ScopeInlineFormSet(BaseInlineFormSet):
     def clean(self):
         forms = tuple(filter(lambda form: form.cleaned_data.get('is_main'), self.forms))
+        if not forms:
+            raise ValidationError('Нужно задать один основной тег')
         if len(forms) > 1:
             raise ValidationError('Основной тэг может быть только один')
         return super().clean()  # вызываем базовый код переопределяемого метода
