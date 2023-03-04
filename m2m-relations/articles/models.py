@@ -31,5 +31,8 @@ class Scope(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE, verbose_name='Тэг', related_name='scopes')
     is_main = models.BooleanField(default=False, verbose_name='Основной Тэг')
 
+    class Meta:
+        ordering = ('-is_main', 'tag__name')
+
     def __str__(self):
         return f"Тег id {self.pk}"

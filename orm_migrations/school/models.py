@@ -9,6 +9,7 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = 'Учитель'
         verbose_name_plural = 'Учителя'
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
